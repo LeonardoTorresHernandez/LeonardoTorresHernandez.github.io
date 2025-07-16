@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonardo Torres Hernández | Machine Learning Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0B1120;
+            --bg-light: #1E293B;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --accent: #2DD4BF;
+            --accent-dark: #14B8A6;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            cursor: none; /* Hide the default cursor */
+        }
+        
+        /* Animated Gradient Background */
+        .animated-gradient-bg {
+            background: linear-gradient(-45deg, #0B1120, #111827, #0B1120, #1E293B);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+            z-index: 9999;
+            opacity: 0; /* Hidden by default */
+        }
+        .custom-cursor.visible {
+            opacity: 1;
+        }
+        .custom-cursor.grow {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(45, 212, 191, 0.25);
+        }
+
+        /* Scroll-triggered animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Gradient text for hero */
+        .hero-text-gradient {
+            background: linear-gradient(to right, var(--text-primary), #bdc3c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 3D Tilt Effect on Cards */
+        .tilt-card {
+            transition: transform 0.1s linear, box-shadow 0.3s ease;
+            will-change: transform;
+        }
+    </style>
+</head>
+<body class="antialiased animated-gradient-bg">
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Header & Navigation -->
+    <header class="bg-slate-900/50 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-slate-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-xl font-bold text-white interactive">Leonardo Torres Hernández</a>
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-300 hover:text-white transition-colors interactive">About</a>
+                    <a href="#services" class="text-slate-300 hover:text-white transition-colors interactive">Services</a>
+                    <a href="#portfolio" class="text-slate-300 hover:text-white transition-colors interactive">Portfolio</a>
+                    <a href="#contact" class="text-slate-300 hover:text-white transition-colors interactive">Contact</a>
+                </nav>
+                <a href="#contact" class="hidden md:block bg-teal-400 text-slate-900 font-bold py-2 px-4 rounded-lg hover:bg-teal-300 transition-all interactive">
+                    Get in Touch
+                </a>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none interactive">
+                        <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 backdrop-blur-xl">
+            <nav class="flex flex-col items-center space-y-6 py-8">
+                <a href="#about" class="text-slate-300 hover:text-white transition-colors text-lg mobile-nav-link interactive">About</a>
+                <a href="#services" class="text-slate-300 hover:text-white transition-colors text-lg mobile-nav-link interactive">Services</a>
+                <a href="#portfolio" class="text-slate-300 hover:text-white transition-colors text-lg mobile-nav-link interactive">Portfolio</a>
+                <a href="#contact" class="text-slate-300 hover:text-white transition-colors text-lg mobile-nav-link interactive">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section id="hero" class="relative py-20 md:py-32 overflow-hidden">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight hero-text-gradient animate-on-scroll">
+                    Turning Calculus & Caffeine Into Clean Code.
+                </h1>
+                <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-slate-300 animate-on-scroll" style="transition-delay: 150ms;">
+                    I build machine learning models that actually make sense. If you need more than a black box, you've come to the right place.
+                </p>
+                <div class="mt-8 flex justify-center gap-4 animate-on-scroll" style="transition-delay: 300ms;">
+                    <a href="#portfolio" class="bg-teal-400 text-slate-900 font-bold py-3 px-8 rounded-lg hover:bg-teal-300 transition-all text-lg interactive">
+                        See The Proof
+                    </a>
+                    <a href="#contact" class="bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-all text-lg interactive">
+                        Start a Project
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20 bg-black/20">
+            <div class="container mx-auto px-6 animate-on-scroll">
+                <div class="grid md:grid-cols-5 gap-12 items-center max-w-6xl mx-auto">
+                    <div class="md:col-span-2">
+                         <svg width="100%" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_105_2)">
+                            <path d="M200 400C310.457 400 400 310.457 400 200C400 89.543 310.457 0 200 0C89.543 0 0 89.543 0 200C0 310.457 89.543 400 200 400Z" fill="url(#paint0_linear_105_2)"/>
+                            <path d="M112.5 287.5L150 200L200 250L250 150L287.5 212.5" stroke="#2DD4BF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <defs>
+                            <linearGradient id="paint0_linear_105_2" x1="0" y1="0" x2="400" y2="400" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#1E293B"/>
+                            <stop offset="1" stop-color="#0F172A"/>
+                            </linearGradient>
+                            <clipPath id="clip0_105_2">
+                            <rect width="400" height="400" fill="white"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="md:col-span-3">
+                        <h2 class="text-3xl font-bold text-white mb-4">I build things from scratch.</h2>
+                        <div class="w-24 h-1 bg-teal-400 mb-8 rounded-full"></div>
+                        <p class="text-lg text-slate-300 mb-4">
+                            Let's be honest, I'm one of those weirdos who actually enjoyed multivariable calculus. That love for how things work on a fundamental level is what pulled me into machine learning.
+                        </p>
+                        <p class="text-lg text-slate-300">
+                           I don't just import a library and hope for the best. My passion is in understanding the 'why'—building custom algorithms that are not only powerful but also interpretable. If you're tired of black-box solutions, we'll get along just fine.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-white text-center mb-4 animate-on-scroll">How I Can Help</h2>
+                <div class="w-24 h-1 bg-teal-400 mx-auto mb-12 rounded-full animate-on-scroll"></div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Service 1 -->
+                    <div class="bg-slate-800 p-8 rounded-lg shadow-lg text-center animate-on-scroll tilt-card interactive">
+                        <h3 class="text-xl font-bold text-white mb-2">Algorithm Prototyping</h3>
+                        <p class="text-slate-400">Got a brilliant idea on a napkin or a complex academic paper? I'll translate that theory into functional, high-performance Python code.</p>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="bg-slate-800 p-8 rounded-lg shadow-lg text-center animate-on-scroll tilt-card interactive" style="transition-delay: 150ms;">
+                        <h3 class="text-xl font-bold text-white mb-2">Interpretable AI</h3>
+                        <p class="text-slate-400">In fields like finance or research, the 'why' is everything. I build models that give you clear, understandable formulas, not just opaque predictions.</p>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="bg-slate-800 p-8 rounded-lg shadow-lg text-center animate-on-scroll tilt-card interactive" style="transition-delay: 300ms;">
+                        <h3 class="text-xl font-bold text-white mb-2">Code Optimization</h3>
+                        <p class="text-slate-400">Is your data pipeline crawling? I'll dive into your NumPy, SciPy, or Pandas code and make it run like it's on a deadline-fueled espresso shot.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 bg-black/20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-white text-center mb-4 animate-on-scroll">My Projects</h2>
+                <div class="w-24 h-1 bg-teal-400 mx-auto mb-12 rounded-full animate-on-scroll"></div>
+                <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                    
+                    <!-- Project 1: EvoFormula -->
+                    <div class="bg-slate-800 rounded-lg shadow-lg overflow-hidden animate-on-scroll tilt-card interactive">
+                        <img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgNjAwIDQwMCIgZmlsbD0ibm9uZSI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUUyOTNCIi8+CjxwYXRoIGQ9Ik0wIDIwMFMxMDAgMTUwIDIwMCAyMDBTMzAwIDI1MCA0MDAgMjAwUzUwMCAxNTAgNjAwIDIwMCIgc3Ryb2tlPSIjMkRENEJGIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTc1IiByPSIzIiBmaWxsPSIjRjFGNUY5Ii8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjE4OCIgcj0iMyIgZmlsbD0iI0YxRjVGOVsiLz4KPGNpcmNsZSBjeD0iMjUwIiBjeT0iMjEyIiByPSIzIiBmaWxsPSIjRjFGNUY5Ii8+CjxjaXJjbGUgY3g9IjM1MCIgY3k9IjE4OCIgcj0iMyIgZmlsbD0iI0YxRjVGOVsiLz4KPGNpcmNsZSBjeD0iNDUwIiBjeT0iMTc1IiByPSIzIiBmaWxsPSIjRjFGNUY5Ii8+Cjx0ZXh0IHg9IjMwMCIgeT0iMzgwIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM5NEE0QjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPnkxID0gc2luKHgpICogY29zKHgpPC90ZXh0Pgo8L3N2Zz4=' alt="EvoFormula Project Abstract Visualization" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">EvoFormula: Symbolic Regression</h3>
+                            <p class="text-slate-400 mb-4">A symbolic regression engine that evolves interpretable mathematical formulas from data using genetic programming and automatically defined functions (ADFs).</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-slate-700 text-teal-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Python</span>
+                                <span class="bg-slate-700 text-teal-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">NumPy</span>
+                                <span class="bg-slate-700 text-teal-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Genetic Programming</span>
+                            </div>
+                            <a href="https://github.com/LeonardoTorresHernandez/EvoFormula--Interpretable-Symbolic-Regression-with-Evolving-Functions" target="_blank" class="inline-block bg-slate-700 text-white font-semibold py-2 px-4 rounded-lg hover:bg-slate-600 transition-all">
+                                View on GitHub &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Piecewise Taylor Regression -->
+                    <div class="bg-slate-800 rounded-lg shadow-lg overflow-hidden animate-on-scroll tilt-card interactive" style="transition-delay: 150ms;">
+                        <img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUUyOTNCIi8+CjxwYXRoIGQ9Ik01MCAzMDBDMTE4LjUgMTcwLjUgMTY4LjUgMTcwLjUgMjUwIDIwMEwzNTAgMjAwQzQzMS41IDIyOS41IDQ4MS41IDMyOS41IDU1MCAxMDAiIHN0cm9rZT0iIzJERDRCRiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIyNTAiIHkxPSIwIiB4Mj0iMjUwIiB5Mj0iNDAwIiBzdHJva2U9IiMzMzQxNTU1IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1kYXNoYXJyYXk9IjQgNCIvPgo8bGluZSB4MT0iMzUwIiB5MT0iMCIgeDI9IjM1MCIgeTI9IjQwMCIgc3Ryb2tlPSIjMzM0MTU1IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1kYXNoYXJyYXk9IjQgNCIvPgo8dGV4dCB4PSIyNTAiIHk9IjM4MCIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE2IiBmaWxsPSIjOTRBM0I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Lbm90IDE8L3RleHQ+Cjx0ZXh0IHg9IjM1MCIgeT0iMzgwIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM5NEE0QjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPktub3QgMjwvdGV4dD4KPC9zdmc+Cg==' alt="Piecewise Taylor Regression Abstract Visualization" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Piecewise Taylor Regression</h3>
+                            <p class="text-slate-400 mb-4">A Python package for fitting flexible, local polynomial models to complex data by fitting separate Taylor polynomials at specified knots.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-slate-700 text-teal-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Python</span>
+                                <span class="bg-slate-700 text-teal-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">NumPy</span>
+                                <span class="bg-slate-700 text-teal-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Scikit-Learn</span>
+                            </div>
+                            <a href="https://github.com/LeonardoTorresHernandez/piecewise-taylor-regression" target="_blank" class="inline-block bg-slate-700 text-white font-semibold py-2 px-4 rounded-lg hover:bg-slate-600 transition-all">
+                                View on GitHub &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-6 text-center animate-on-scroll">
+                <h2 class="text-3xl font-bold text-white">Let's Build Something Great</h2>
+                <p class="text-lg text-slate-300 mt-4 max-w-2xl mx-auto">
+                    Have a project, an idea, or just want to talk shop? I'm always open to new challenges. Drop me a line below.
+                </p>
+                <div class="max-w-xl mx-auto mt-12 text-left">
+                    <form id="contact-form" action="https://formspree.io/f/xjkovzpy" method="POST">
+                        <div id="form-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-slate-400 mb-2">Name</label>
+                                    <input type="text" id="name" name="name" required class="w-full bg-slate-800 border border-slate-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-teal-400 interactive">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-slate-400 mb-2">Email</label>
+                                    <input type="email" id="email" name="email" required class="w-full bg-slate-800 border border-slate-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-teal-400 interactive">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-slate-400 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full bg-slate-800 border border-slate-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-teal-400 interactive"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="bg-teal-400 text-slate-900 font-bold py-3 px-8 rounded-lg hover:bg-teal-300 transition-all text-lg interactive">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                        <div id="form-success-message" class="hidden text-center bg-teal-400/10 border border-teal-400 text-teal-300 px-4 py-3 rounded-lg">
+                            <h3 class="font-bold text-lg">Thank You!</h3>
+                            <p>Your message has been sent. I'll get back to you shortly.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p class="text-slate-400">&copy; 2025 Leonardo Torres Hernández. All Rights Reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/LeonardoTorresHernandez" target="_blank" class="text-slate-400 hover:text-white transition-colors interactive">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- 1. ROBUST CUSTOM CURSOR ---
+        const cursor = document.querySelector('.custom-cursor');
+        if (cursor) {
+            const interactiveElements = document.querySelectorAll('.interactive, a, button');
+
+            document.addEventListener('mousemove', e => {
+                // Use clientX and clientY for viewport-relative coordinates
+                cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            });
+
+            // Show cursor when mouse enters the viewport
+            document.documentElement.addEventListener('mouseenter', () => {
+                cursor.classList.add('visible');
+            });
+
+            // Hide cursor when mouse leaves the viewport
+            document.documentElement.addEventListener('mouseleave', () => {
+                cursor.classList.remove('visible');
+            });
+            
+            // Hide cursor when tab is not active
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    cursor.classList.remove('visible');
+                } else {
+                    cursor.classList.add('visible');
+                }
+            });
+
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+            });
+        }
+
+
+        // --- 2. SCROLL-TRIGGERED ANIMATIONS ---
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- 3. 3D TILT EFFECT ON CARDS ---
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const { width, height } = rect;
+                
+                const rotateX = (y / height - 0.5) * -10; // Max rotation 5 degrees
+                const rotateY = (x / width - 0.5) * 10;   // Max rotation 5 degrees
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+        
+        // --- 4. MOBILE MENU TOGGLE ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openIcon = document.getElementById('menu-open-icon');
+        const closeIcon = document.getElementById('menu-close-icon');
+        const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+        const toggleMenu = () => {
+            mobileMenu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        };
+
+        mobileMenuButton.addEventListener('click', toggleMenu);
+        navLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // --- 5. CONTACT FORM SUBMISSION ---
+        const contactForm = document.getElementById('contact-form');
+        const formContent = document.getElementById('form-content');
+        const successMessage = document.getElementById('form-success-message');
+
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(contactForm);
+                
+                fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        formContent.classList.add('hidden');
+                        successMessage.classList.remove('hidden');
+                    } else {
+                        response.json().then(data => {
+                            if (Object.hasOwn(data, 'errors')) {
+                                alert(data["errors"].map(error => error["message"]).join(", "));
+                            } else {
+                                alert('Oops! There was a problem submitting your form.');
+                            }
+                        })
+                    }
+                }).catch(error => {
+                    alert('Oops! There was a problem submitting your form.');
+                });
+            });
+        }
+    });
+    </script>
+</body>
+</html>
